@@ -24,7 +24,9 @@ app.use(express.json()); // allows us to parse incoming requests:req.body
 app.use(cookieParser()); // allows us to parse incoming cookies
 
 app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
-  
+app.get("/",  (req, res) => {
+  res.send("Server is running");
+})
 app.use("/api/auth", authRoutes)
 app.use("/api/admin", adminRoutes)
 app.use("/api/user", userRoutes)
