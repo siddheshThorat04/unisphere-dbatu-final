@@ -978,6 +978,7 @@ body::-webkit-scrollbar {
   position: fixed;
   right: 18px;
   top: 20px;
+  z-index: 10;
   /* color: white; */
   /* opacity: 0.8; */
 }
