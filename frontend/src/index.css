@@ -62,8 +62,8 @@ a {
 }
 .slideShow{
   /* border: 2px solid red; */
-  position: fixed;;
-  top: 40px;
+  /* position: fixed;; */
+  /* top: 40px; */
   height: 100px;
   width: 100px;
   display: flex;
@@ -71,26 +71,48 @@ a {
   overflow: hidden;
   align-items: center;
 }
+.dialogue{
+  animation: dialogRaise 10s  linear ;
+  animation-delay: 5s;
+  position: relative;
+  top: -800px;
+}
 .slider{
   height: 100px;
   display: flex;
   animation:slideShow 20s infinite linear ;
-  animation-delay: 2s;
+  animation-delay: 0s;
   /* border: 2px solid red; */
   width: fit-content;
   position: relative;
   right: -100px;
   align-items: center;
+  opacity: 0.9;
 }
 .video{
   zoom: 100%;
 }
+.signupPageFont h1 {
+  color: black;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
 @keyframes slideShow {
   0%{
-    right: 0px;
+    right: -10px;
   }
   100%{
     right: 470px;
+  }
+}
+@keyframes dialogRaise {
+  0%{
+    top: 0px;
+  }
+  25%{
+    top: 0px;
+  }
+  100%{
+    top: 40px;
   }
 }
 .login h1 {
@@ -144,10 +166,10 @@ a {
   height: 40px;
   margin: 10px;
   border-radius: 10px;
-  color: black;
+  color: whitesmoke;
   font-weight: 600;
   cursor: pointer;
-  background-color: #AAA7A8;
+  background-color: #173187;
   border: none;
 }
 

@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { useAuthContext } from '../context/authContext';
 import { set } from 'mongoose';
+import dialogue from '../assets/dialogue.jpg'
 // import { useDarkThemeContext } from '../context/DarkTheme';
 // import { useDarkThemeContext } from '../context/DarkTheme';
 // import eventsLogo from '../assets/events.png'
 // import chattingPPLogo from '../assets/chatHomeLogo.png'
 // import newsLogo from '../assets/last_24_hrs.png'
-// import Slider from '../components/Slider';
+import Slider from '../components/Slider';
 // import eventsLogo from '../assets/events.png'
 
 const Signup = () => {
@@ -38,7 +39,7 @@ const Signup = () => {
       const res = await axios.get(`${API}/api/admin/getClg`)
       console.log(res.data)
       
-      setcolleges(res.data.colleges)
+      setcolleges(res.data.colleges.sort((a, b) => a.name.localeCompare(b.name)))
       setIsLoading(false)
     }
 
@@ -64,21 +65,22 @@ const Signup = () => {
   }
 
   return (
-    <>
-      <div className="h-screen border-2 border-red-500 bg-[#EDE6D9]  ">
-        <h1 className=''  >join<span className='Name'  > uniSphere</span></h1>
+    <div  className='flex flex-col items-center justify-center  bg-white gap-[20px]    '  >
+      <h1 className='fontHeading text-3xl text-white' ></h1>
+        <Slider  />
+      <div className="h-screen ">
         <form onSubmit={handleSubmit} className='loginForm  w-full px-3 ' >
 
           <div className={showPassword ? "inputContainer2" : "inputContainer2 hidden"}>
             <label htmlFor="username" className='text-white' >what we can call you ?</label>
             <input type="text"  name='username' value={username2} onChange={(e) => setUsername(e.target.value)} placeholder='Enter the username' />
           </div>
-          <div className={showPassword ? "inputContainer2" : "inputContainer2 hidden "}>
+          <div className={showPassword ? " hidden inputContainer2" : "inputContainer2 hidden "}>
             <label htmlFor="password" className='text-white'  >Password (keep it short)</label>
             <input type="text" name='password' value={password2} onChange={(e) => setPassword(e.target.value)} placeholder='Enter the password' />
           </div>
           <div className="inputContainer2">
-            <label htmlFor="college" className='text-white'  >Select college👇</label>
+            <label htmlFor="college" className='fontHeading text-sm text-white'  >Select where you belong 👇</label>
             <select className='selectCollege' name="college" id="">
               {isLoading && <option>Loading...</option>}
               { !isLoading &&
@@ -86,12 +88,13 @@ const Signup = () => {
               }
             </select>
           </div>
-          <button type='submit' className='loginBtn' disabled={isLoading}   >{isLoading ? "wait..." : "join"}</button>
+          <button type='submit' className='loginBtn fontHeading text-sm ' disabled={isLoading}   >{isLoading ? "wait..." : "join"}</button>
 
         </form>
-        Show username and password <input type="checkbox" onChange={(e) => setShowPassword(e.target.checked)} />
+        <h1 className='fontHeading text-sm text-black text-center' >Custom Username <input type="checkbox" onChange={(e) => setShowPassword(e.target.checked)} /></h1>
+        <img className='h-[20vh] dialogue opacity-70 '  src={dialogue} alt="" />
       </div>
-    </>
+    </div>
 
   )
 }

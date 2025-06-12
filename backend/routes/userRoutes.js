@@ -64,7 +64,7 @@ router.post("/addEvent",upload.single("image"),protectRoute,async(req,res)=>{
         const {Name,description,isForAll}=req.body
         const college=req.user.college
         const image=req.file ? req.file.location:""
-        const event=new Event({Name,description,college,isForAll,image:image})
+        const event=new Event({Name,description,college,postedBy:req.user._id ,isForAll,image:image})
         await event.save()
         res.status(200).json({event})
     } catch (error) {

@@ -146,7 +146,7 @@ const Collabrate = () => {
                   >
                     {project?.description}
                   </h1>
-                  <a href={project?.link} target="_blank">
+                  <a href={project?.link} >
                     <h1
                       className={
                         isDark === "false"

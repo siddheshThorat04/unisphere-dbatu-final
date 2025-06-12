@@ -37,19 +37,9 @@ const ContactUs = () => {
             rel="noopener noreferrer"
             className="inline-flex   items-center space-x-2 text-pink-500 hover:underline text-sm"
           >
-            <FaInstagram />
+            <span className= {isDarkMode ? ' text-white' : ' text-black'} >Developer:</span> <FaInstagram />
             <span>@sid__.4216</span>
           </a>
-          <a
-            href="https://www.instagram.com/your_instagram_username"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex   items-center space-x-2 text-pink-500 hover:underline text-sm"
-          >
-            <FaInstagram />
-            <span>@uniSphere_Updates</span>
-          </a>
-
           <a
             href="https://www.linkedin.com/in/siddhesh-thorat-379224295/"
             target="_blank"
@@ -57,8 +47,18 @@ const ContactUs = () => {
             className="inline-flex   items-center space-x-2 text-blue-600 hover:underline text-sm"
           >
             <FaLinkedin />
-            <span>Connect on LinkedIn</span>
+            <span>Siddhesh Thorat on LinkedIn</span>
           </a>
+          <a
+            href="https://www.instagram.com/matrics_updates"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex   items-center space-x-2 text-pink-500 hover:underline text-sm"
+          >
+            <span className= {isDarkMode ? ' text-white' : ' text-black'} >Official page:</span><FaInstagram />
+            <span>@matrics_updates</span>
+          </a>
+
         </div>
       </section>
     </div>
