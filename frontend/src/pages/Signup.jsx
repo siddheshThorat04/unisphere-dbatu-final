@@ -80,15 +80,16 @@ const Signup = () => {
             <input type="text" name='password' value={password2} onChange={(e) => setPassword(e.target.value)} placeholder='Enter the password' />
           </div>
           <div className="inputContainer2">
-            <label htmlFor="college" className='fontHeading text-sm text-white'  >Select where you belong 👇</label>
+            <label htmlFor="college" className='fontHeading text-sm text-white'  >Select Your College 👇</label>
             <select className='selectCollege' name="college" id="">
+              <option>SELECT</option>
               {isLoading && <option>Loading...</option>}
               { !isLoading &&
                 colleges.map((clg) => <option className='bg-black' key={clg._id} value={clg._id}>{clg.name}</option>)
               }
             </select>
           </div>
-          <button type='submit' className='loginBtn fontHeading text-sm ' disabled={isLoading}   >{isLoading ? "wait..." : "join"}</button>
+          <button type='submit' className='loginBtn fontHeading text-sm ' disabled={isLoading}   >{isLoading  ? "wait..."   : "join"}</button>
 
         </form>
         <h1 className='fontHeading text-sm text-black text-center' >Custom Username <input type="checkbox" onChange={(e) => setShowPassword(e.target.checked)} /></h1>

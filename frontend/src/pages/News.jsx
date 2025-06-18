@@ -234,7 +234,7 @@ const News = () => {
             className="addPostForm w-[90vw] absolute top-[50%] left-[50%] translate-x-[-50%] max-w-[600px] translate-y-[-50%] h-[500px]  bg-white pt-10"
           >
             <button className="offButton">x</button>
-            <h1 className="Post_latest_happening2 text-3xl text-gray-600 ">
+            <h1 className="Post_latest_happening2 text-3xl text-gray-600 mt-4  ">
               Post latest happening
             </h1>
             <input

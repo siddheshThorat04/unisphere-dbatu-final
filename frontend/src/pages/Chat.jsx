@@ -104,7 +104,7 @@ function Chat() {
       {partner ? (
         <>
           <div className=" message-container  max-w-[600px]" ref={messagesRef}>
-          <div className="w-[70%] m-auto h-1  h-[400px]" ><h1 className="text-center text-[12px] text-white"> Nothing is being stored, talk freely !! </h1></div>
+          <div className="w-[70%] m-auto h-1  h-[400px]" ><h1 className={isDark === "false" ? "text-white text-center mt-10" : "text-black text-center mt-10  "}> Nothing is being stored, talk freely !! </h1></div>
             {messages.map((msg, index) => (
               // <p key={index}><b>{msg.sender}:</b> {msg.message}</p>
               <div key={index} className={msg.sender === "You" ? "flex items-center justify-end" : "flex items-center"}  > <span><img className="h-10" src={msg.sender !== "You" ? dp:undefined} alt="" /></span> <p className="bg-gray-100 px-2 py-1 rounded-lg max-w-[70%] message" > {msg.message}</p> </div>

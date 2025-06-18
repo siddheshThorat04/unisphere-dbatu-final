@@ -13,6 +13,7 @@ import lightmode from "../assets/lightmode.png"
 import eventsLogo from "../assets/events.png" 
 import collabrate from "../assets/collabrate.png"
 
+
 import axios from "axios"
 const Home = () => {
 
@@ -80,23 +81,23 @@ const Home = () => {
   }
   console.log(isDark)
   return (
-    <> 
-    <button  onClick={()=>setIsSideBarOn(true)} className={isDark==="false" ? "text-white absolute   p-2 rounded-lg    top-2 left-0  bg-none " : "text-black absolute  p-2 rounded-lg    top-2 left-0  bg-none "}><CiCircleMore className='text-3xl'/></button>
-    {isSideBarOn && <div className="sideNavigation" onClick={()=>setIsSideBarOn(false)}  ><div className='sideNavigationInner'  ><div className="navElems"><button className='navLinks'  onClick={()=>{window.location.href=`/profile/${authUser._id}`}}    >profile</button> {[{value:"about us",page:"/about-us"},{ value:"contact us ",page:"/contact-us"}, {value:"privacy policy",page:"/privacy-policy"} ].map((item) => {return <button className='navLinks' key={item.value}  onClick={()=>{window.location.href=item.page}}    >{item.value}</button>})} </div><div className="googleAdnav"></div><button className='sideBarButton'  onClick={()=>setIsSideBarOn(false)}  >x</button><button onClick={logout}  className='text-black text-3xl font-semibold ' ><CiLogout className='text-2xl'/></button>   </div></div> }
+    <div> 
+    <button  onClick={()=>setIsSideBarOn(true)} className={isDark==="false" ? "text-white absolute   p-2 rounded-lg    top-2 left-0  bg-none  font-bold  " : "text-black absolute  p-2 rounded-lg    top-2 left-0  bg-none font-bold   "}><CiCircleMore className='text-3xl'/>  </button>
+    {isSideBarOn && <div className="sideNavigation" onClick={()=>setIsSideBarOn(false)}  ><div className='sideNavigationInner'  ><div className="navElems"><button className='navLinks'  onClick={()=>{window.location.href=`/profile/${authUser._id}`}}    >profile</button> {[{value:"about us",page:"/about-us"},{ value:"contact us ",page:"/contact-us"}, {value:"privacy policy",page:"/privacy-policy"} ].map((item) => {return <button className='navLinks' key={item.value}  onClick={()=>{window.location.href=item.page}}    >{item.value}</button>})} </div><div className="googleAdnav"></div><button className='sideBarButton'  onClick={()=>setIsSideBarOn(false)}  >x</button><button onClick={logout}  className='text-black text-6xl  absolute bottom-2 right-2   font- bold ' ><CiLogout className='text-2xl'/></button>   </div></div> }
         
  <button  onClick={SwitchDarkMode}  className={isDark==="false" ? ' text-white absolute border-[1px] p-2 rounded-lg    top-2 right-2  bg-none   ' : " text-black absolute border-[1px] border-black  p-2 rounded-lg    top-2 right-2  bg-none  "}>{isDark==="false"?<img src={lightmode} className='h-7   '  alt="" />:<img src={darkmode} className='h-7'  alt="" />}</button>
       <div className={isDark==="false" ? 'bg-black min-h-screen ' : "bg-white min-h-screen"}  >
-        <h1 className='text-2xl text-black text-center ' ><span className={isDark==="false"?"text-white":"text-black"}>Welcome</span> <span className='text-purple-500'  >Stranger</span>🙋🏼‍♂ </h1>
+        <h1 className='text-2xl text-black text-center h-14 flex items-center justify-center   ' ><span className={isDark==="false"?"text-white":"text-black"}>Welcome &nbsp;</span><span className='text-purple-500'  > stranger </span>🙋🏼‍♂ </h1>
         <div className="navigation mt-[50px]  ">
           <button className={isDark==="false"?"card  text-white  border-[1px] border-white":"card  border-[1px] border-black"} onClick={() => { window.location.href = "/news" }}   ><img className={isDark ? "homeLogos text-white" : 'homeLogos text-white'} src={last_24_hrs} alt="" />Insights</button>
           <button className={isDark==="false"?"card  text-white  border-[1px] border-white":"card  border-[1px] border-black"} onClick={() => { window.location.href = "/study-zone" }}  > <img className={isDark ? "homeLogos text-white" : 'homeLogos text-white'} src={studyTogether} alt="" />  Study Together</button>
           <button className={isDark==="false"?"card  text-white  border-[1px] border-white":"card  border-[1px] border-black"} onClick={() => { window.location.href = "/events" }}  > <img className={isDark ? "homeLogos text-white" : 'homeLogos text-white'} src={eventsLogo} alt="" />Events</button>
           <button className={isDark==="false"?"card  text-white  border-[1px] border-white":"card  border-[1px] border-black"} onClick={() => { window.location.href = "/chat" }}> <img className={isDark ? "homeLogos text-white   " : 'homeLogos text-[7px] text-black'} src={randomChatLogo} alt="" />Chat</button>
-          <button className={isDark==="false"?"card  text-white  border-[1px] border-white":"card  border-[1px] border-black"} onClick={() => { window.location.href = "/collabrate" }} > <img className={isDark ? "homeLogos text-white" : 'homeLogos text-white '} src={collabrate} alt="" />Collabrate</button>
+          <button className={isDark==="false"?"card  text-white  border-[1px] border-white":"card  border-[1px] border-black"} onClick={() => { window.location.href = "/collabrate" }} > <img className={isDark ? "homeLogos text-white" : 'homeLogos text-white '} src={collabrate} alt="" />Collaborate</button>
           {/* <button className={isDark==="false"?"card  text-white  border-[1px] border-white":"card  border-[1px] border-black"} onClick={() => { window.location.href = "/Leadboard" }} > <img className={isDark ? "homeLogos text-white" : 'homeLogos text-white'} src={podium} alt="" />Leadboard</button> */}
         </div>
       </div>
-    </>
+    </div>
   )
 }
 
