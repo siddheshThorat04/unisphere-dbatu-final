@@ -41,6 +41,13 @@ const Events = () => {
     console.log(res.data)
     window.location.reload();
   }
+  const verifyEvent = async (id) => {
+    const res = await axios.post(`${API}/api/admin/verifyEvent/${id}`, {
+      withCredentials:true
+    })
+    console.log(res.data)
+    window.location.reload();
+  }
   const submit = async (e) => {
 
     e.preventDefault()
@@ -74,12 +81,12 @@ const Events = () => {
         return (
           <div className={isDark==="false"?'eventDiv border-white w-[97vw]':"eventDiv border-black w-[97vw]"} key={item._id}  >
       
-            <h1 className={isDark==="false"?'flex newsTitle font-bold  justify-between ':" newsTitle   font-bold flex justify-between "}  > <span className={isDark==="false"?'w-[90%] eventTitle text-white tracking-wider text-2xl  overflow-auto':'w-[90%] eventTitle tracking-wider text-black text-xl overflow-auto'}> {item.Name} </span> <span className='clgName'  >{item.isForAll ?  "University": item.college.name}</span> </h1>
+            <h1 className={isDark==="false"?'flex max-h-[100px]  font-bold  justify-between ':"  max-h-[100px]   font-bold flex justify-between "}  > <span className={isDark==="false"?'w-[90%] eventTitle text-white tracking-wider text-2xl  overflow-auto':'w-[90%] eventTitle tracking-wider text-black text-xl overflow-auto'}> {item.Name} </span> <span className='clgName'  >{item.isForAll ?  "University": item.college.name}</span> </h1>
             <p className={isDark==="false"?'text-gray-200 max-h-[150px] overflow-auto':'eventDescription max-h-[150px] overflow-auto text-black'}  >{item.description}</p>
             {item.image && <div className={isDark==="false"?'eventImageDiv eventImageDivDark mt-2 ':"eventImageDiv  mt-2 "}>
               <img src={item.image} onClick={() => setfullScreenImage(item.image)} className='eventImage' alt="" />
             </div>}
-            {(authUser.isAdmin  || authUser._id === item.postedBy?._id  ) &&  <MdDelete  onClick={() => deleteEvent(item._id)}  className='text-red-500 text-xl'  />}
+            {(authUser.isAdmin  || authUser._id === item.postedBy?._id  ) && <> <MdDelete  onClick={() => deleteEvent(item._id)}  className='text-red-500 text-xl'  />  { !item.isVerified &&  <button onClick={() => verifyEvent(item._id)}>verify</button>}</>}
 
           </div>
         )

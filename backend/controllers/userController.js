@@ -25,9 +25,13 @@ export const getNews = async (req, res) => {
       res.status(200).json({ message: "Latest Insights Fetched", news: news });
     } else {
       const news = await News.find({
-        $or: [{ college: user.college }, { isForAll: true }],
+        $and: [
+          {
+            $or: [{ college: user.college }, { isForAll: true }],
+          },
+          { isVerified: true },
+        ],
       }).populate("postedBy college");
-
       res.status(200).json({ message: "Latest Insights Fetched", news: news });
     }
   } catch (error) {
@@ -38,10 +42,20 @@ export const getNews = async (req, res) => {
 export const getEvents = async (req, res) => {
   try {
     const user = req.user;
-    const events = await Event.find({
-      $or: [{ college: user.college }, { isForAll: true }],
-    }).populate("college postedBy");
-    res.status(200).json({ message: "Events Fetched", events: events });
+    if(user.isAdmin){
+      const events = await Event.find().populate("college postedBy");
+      res.status(200).json({ message: "Events Fetched", events: events });
+    }else{
+      const events = await Event.find({
+        $and: [
+          {
+            $or: [{ college: user.college }, { isForAll: true }],
+          },
+          { isVerified: true },
+        ],
+      }).populate("college postedBy");
+      res.status(200).json({ message: "Events Fetched", events: events });
+    }
   } catch (error) {
     res.status(400).json({ error: error.message });
   }

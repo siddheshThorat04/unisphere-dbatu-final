@@ -6,7 +6,7 @@ import  express from 'express'
 // import  getLeadboard from '../controllers/adminController'
 // import  deleteNews from '../controllers/adminController'
 // import  deleteEvent from '../controllers/adminController'
-import { addCollege, addMeet, getColleges, deleteMeet, getLeadboard, deleteNews, deleteEvent, blockUser } from '../controllers/adminController.js'
+import { addCollege, addMeet, getColleges, deleteMeet, getLeadboard, deleteNews, deleteEvent, blockUser, verifyNews, verifyEvent } from '../controllers/adminController.js'
 // const { getAdmins, getAdmin } = require('../controllers/adminController')
 
 const router = express.Router()
@@ -19,5 +19,7 @@ router.post('/deleteNews/:id', deleteNews )
 router.post('/deleteEvent/:id', deleteEvent )   
 router.get('/getLeadboard', getLeadboard )
 router.post('/block-user/:id', blockUser )
+router.post('/verifyNews/:id', verifyNews )
+router.post('/verifyEvent/:id', verifyEvent )
 
 export default router

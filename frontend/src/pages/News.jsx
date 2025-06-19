@@ -36,6 +36,21 @@ const News = () => {
     console.log(isDark);
     getNews();
   }, []);
+  const verifyNews = async (id) => {
+    const res = await axios.post(
+      `${API}/api/admin/verifyNews/${id}`,
+      { withCredentials: true },
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const data = res.data;
+    console.log(data);
+    window.location.reload();
+  };
   const deleteNews = async (id) => {
     const res = await axios.post(
       `${API}/api/admin/deleteNews/${id}`,
@@ -160,8 +175,8 @@ const News = () => {
                 <h1
                   className={
                     isDark === "false"
-                      ? "newsTitle text-2xl text-white  max-w-[80vw] overflow-auto "
-                      : "newsTitle text-2xl text-black min-w-[80vw]   max-w-[80vw] overflow-auto "
+                      ? "newsTitle text-2xl text-white overflow-auto "
+                      : "newsTitle text-2xl text-black overflow-auto "
                   }
                 >
                   {item.title}
@@ -217,10 +232,13 @@ const News = () => {
                 </h5>
               </a>
               {(authUser.isAdmin || authUser._id === item.postedBy._id) && (
-                <MdDelete
-                  onClick={() => deleteNews(item._id)}
-                  className="text-red-500"
-                />
+                <>
+                  <MdDelete
+                    onClick={() => deleteNews(item._id)}
+                    className="text-red-500"
+                  />
+                  { !item.isVerified &&  <button  className="text-green-500 border-2 border-green-500 p-1 mt-2   rounded  "   onClick={() => verifyNews(item._id)}>verify</button>}
+                </>
               )}
             </div>
           );
@@ -231,7 +249,7 @@ const News = () => {
           {" "}
           <form
             onSubmit={submit}
-            className="addPostForm w-[90vw] absolute top-[50%] left-[50%] translate-x-[-50%] max-w-[600px] translate-y-[-50%] h-[500px]  bg-white pt-10"
+            className="addPostForm w-[90vw] absolute top-[50%] left-[50%] translate-x-[-50%] max-w-[600px] translate-y-[-50%] h-[550px]  bg-white pt-10"
           >
             <button className="offButton">x</button>
             <h1 className="Post_latest_happening2 text-3xl text-gray-600 mt-4  ">
@@ -261,7 +279,6 @@ const News = () => {
               <h4 className="text-black">Only if Required</h4>{" "}
             </div>
             <div className=" isForAllBox flex-col border-[1px] border-black">
-              
               <label className="border-2 flex gap-8 text-lg cursor-pointer rounded p-2  ">
                 Only for my college
                 <input
@@ -282,6 +299,7 @@ const News = () => {
                 />
               </label>
             </div>
+             <h1 className= "text-black  text-center "  >Insight will be posted once it's verfied</h1>
             <button type="submit" className="submitbtn">
               submit
             </button>

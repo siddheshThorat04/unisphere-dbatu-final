@@ -87,3 +87,24 @@ export const blockUser = async (req, res) => {
         res.status(400).json({error:error.message})
     }
 }
+
+export const verifyNews = async (req, res) => {
+    try {
+        const news = await News.findById(req.params.id)
+        news.isVerified = true;
+        await news.save()
+        res.status(200).json({message:"News Verified"})     
+    } catch (error) {
+        res.status(400).json({error:error.message})
+    }
+}
+export const verifyEvent = async (req, res) => {
+    try {
+        const event = await Event.findById(req.params.id)
+        event.isVerified = true;
+        await event.save()
+        res.status(200).json({message:"Event Verified"})     
+    } catch (error) {
+        res.status(400).json({error:error.message})
+    }
+}
