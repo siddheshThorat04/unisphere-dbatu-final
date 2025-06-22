@@ -4,6 +4,7 @@ import Chat from "./pages/Chat";
 import Signup from "./pages/Signup";
 import Home from "./pages/Home";
 
+import { ToastContainer, toast } from 'react-toastify';
 
 import { useAuthContext } from "./context/authContext.jsx";
 import News from "./pages/News.jsx";
@@ -36,6 +37,7 @@ function App() {
 				<Route path='/contact-us' element={<ContactUs/>} />
 				<Route path='/privacy-policy' element={<PrivacyPolicy/>} />
 			</Routes>
+			<ToastContainer/>
 		</>
 	);
 }

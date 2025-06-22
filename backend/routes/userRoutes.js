@@ -52,7 +52,7 @@ router.post("/addNews",upload.single("image"),protectRoute,async(req,res)=>{
         req.user.contributions+=1
         await news.save()
         await req.user.save()
-        res.status(200).json({news})
+        res.status(200).json({message:"Sent to verification",news})
 
     } catch (error) {
         res.status(400).json({error:error.message})
@@ -66,7 +66,7 @@ router.post("/addEvent",upload.single("image"),protectRoute,async(req,res)=>{
         const image=req.file ? req.file.location:""
         const event=new Event({Name,description,college,postedBy:req.user._id ,isForAll,image:image})
         await event.save()
-        res.status(200).json({event})
+        res.status(200).json({message:"Sent to verification",event})
     } catch (error) {
         res.status(400).json({error:error.message})
     }

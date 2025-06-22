@@ -8,6 +8,7 @@ import { useDarkThemeContext } from '../context/DarkTheme';
 import { MdDelete } from "react-icons/md";
 import { useAuthContext } from '../context/authContext';
 import { set } from 'mongoose';
+import { toast } from 'react-toastify';
 const Events = () => {
   const API = import.meta.env.VITE_MODE === "DEVELOPMENT" ? import.meta.env.VITE_API_DEV : import.meta.env.VITE_API_PRODUCTION
 
@@ -27,7 +28,9 @@ const Events = () => {
       })
       const eventArray=res.data.events?.reverse()
       console.log(eventArray)
+      toast.success("Latest Events Fetched");
       setLoading(false);
+
       setevents(eventArray)
 
     }
@@ -38,6 +41,7 @@ const Events = () => {
     const res = await axios.post(`${API}/api/admin/deleteEvent/${id}`, {
       withCredentials:true
     })
+    toast.success("Event Deleted")
     console.log(res.data)
     window.location.reload();
   }
@@ -64,9 +68,11 @@ const Events = () => {
       withCredentials :true
     }).then((res) => {
       console.log(res.data); // Display server success message
+      toast.success(res.data.message);
       window.location.reload();
     }).catch((error) => {
       console.error("Error:", error.response?.data?.message || "An error occurred");
+      toast.error(error.response?.data?.message || "An error occurred");
     });
   }
   const [fullScreenImage, setfullScreenImage] = useState(null);

@@ -9,6 +9,7 @@ import dialogue from '../assets/dialogue.jpg'
 // import chattingPPLogo from '../assets/chatHomeLogo.png'
 // import newsLogo from '../assets/last_24_hrs.png'
 import Slider from '../components/Slider';
+import { toast } from 'react-toastify';
 // import eventsLogo from '../assets/events.png'
 
 const Signup = () => {
@@ -54,12 +55,12 @@ const Signup = () => {
     const response = await axios.post(`${API}/api/auth/signup`, { username, password, college }, { withCredentials: true });
     console.log(response.data)
     if (response.data.error) {
-      alert(response.data.error)
+      toast.error(response.data.error)
 
     } else {
-
       localStorage.setItem("authUser", JSON.stringify(response.data.user));
       setauthUser(response.data.user);
+      toast.success("signed up successfully");
       localStorage.setItem("mbTheme", false)
     }
   }

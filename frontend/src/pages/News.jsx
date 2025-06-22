@@ -5,6 +5,7 @@ import { useAuthContext } from "../context/authContext";
 import { useDarkThemeContext } from "../context/DarkTheme";
 import { CiHome } from "react-icons/ci";
 import { MdDelete } from "react-icons/md";
+import { toast } from "react-toastify";
 
 const News = () => {
   // const API= "http://localhost:5000"
@@ -30,10 +31,9 @@ const News = () => {
       });
       console.log(res.data);
       setnews(res.data?.news.reverse());
+      toast.success("Latest Insights Fetched");
       setLoading(false);
     };
-    console.log(typeof isDark);
-    console.log(isDark);
     getNews();
   }, []);
   const verifyNews = async (id) => {
@@ -64,6 +64,7 @@ const News = () => {
     );
     const data = res.data;
     console.log(data);
+    toast.success("News Deleted");
     window.location.reload();
   };
   const submit = async (e) => {
@@ -86,6 +87,7 @@ const News = () => {
       })
       .then((res) => {
         // console.log(res.data.message); // Display server success message
+        toast.success(res.data.message);
         window.location.reload();
       })
       .catch((error) => {
@@ -93,6 +95,7 @@ const News = () => {
           "Error:",
           error.response?.data?.message || "An error occurred"
         );
+        toast.error(error.response?.data?.message || "An error occurred");
       });
   };
   const [fullScreenImage, setfullScreenImage] = useState(null);
@@ -147,7 +150,7 @@ const News = () => {
           {loading ? (
             <span className="finder animate-bounce inline-block ">🔍</span>
           ) : (
-            "Ohh, Such a Empty 😞"
+            "Ohh, Such an Empty 😞"
           )}{" "}
           <span
             className={

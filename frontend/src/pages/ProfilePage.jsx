@@ -8,6 +8,7 @@ import { IoIosLogOut } from "react-icons/io";
 import { GoHome } from "react-icons/go";
 import axios from "axios";
 import { useDarkThemeContext } from "../context/DarkTheme";
+import { toast } from "react-toastify";
 const ProfilePage = () => {
   // const API = "http://localhost:5000"
   const API =
@@ -30,13 +31,11 @@ const ProfilePage = () => {
     };
     getProfile();
   }, []);
-  const logout =  (e) => {
-    localStorage.setItem("authUser",null)
-    setAuthUser(null)
-    window.location.href="/"
-
-
-  }
+  const logout = (e) => {
+    localStorage.setItem("authUser", null);
+    setAuthUser(null);
+    window.location.href = "/";
+  };
   const handleBlockUser = async () => {
     const res = await axios.post(
       `${API}/api/admin/block-user/${userId}`,
@@ -53,19 +52,38 @@ const ProfilePage = () => {
       alert("Username cannot be empty!");
       return;
     }
-    const res = await axios.post(
-      `${API}/api/user/updateProfile`,
-      { username },
-      { withCredentials: true }
-    );
-    console.log(res.data);
-    if (res.data.error) {
-      alert(res.data.error);
-      return;
+    //   const res = await axios.post(
+    //     `${API}/api/user/updateProfile`,
+    //     { username },
+    //     { withCredentials: true }
+    //   );
+    //   if(res.data.error) {
+    //     console.log("error",res.data.error);
+    //     return;
+    // }else{
+
+    //   localStorage.setItem("authUser", JSON.stringify(res.data.user));
+    //   setauthUser(res.data.user);
+    //   toast.success("username changed");
+    // }
+    try {
+      const res = await axios.post(
+        `${API}/api/user/updateProfile`,
+        { username },
+        { withCredentials: true }
+      );
+      // Successful request (200 OK)
+      localStorage.setItem("authUser", JSON.stringify(res.data.user));
+      setauthUser(res.data.user);
+      toast.success("Profile updated!");
+        window.location.reload();
+    } catch (err) {
+      if (err.response && err.response.data?.error) {
+        toast.error(err.response.data.error); // Shows "Username Taken"
+      } else {
+        toast.error("Something went wrong!");
+      }
     }
-    localStorage.setItem("authUser", JSON.stringify(res.data.user));
-    setauthUser(res.data.user);
-    window.location.reload();
   };
 
   return (

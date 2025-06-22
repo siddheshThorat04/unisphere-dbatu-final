@@ -9,6 +9,8 @@ import dp from "../assets/dp.png"
 import { LuSend } from "react-icons/lu";
 import sendSound from "../assets/sendSound.mp3"
 import newMessage from "../assets/newMessage.mp3"
+import { MdOutlineRestartAlt } from "react-icons/md";
+
 
 
 // newww 
@@ -113,7 +115,7 @@ function Chat() {
 
           </div>
           <div className="flex justify-between  fixed bottom-2 left-0 right-0 items-center mr-1 ml-1"  >
-            <span className={isDark === "false" ? " p-1 font-bold rounded-lg text-black bg-blue-700 text-3xl" : "   p-1 font-bold rounded-lg text-black bg-purple-300 text-3xl "} ><VscDebugDisconnect onClick={handleLeaveChat} /></span>
+            <span className={isDark === "false" ? " p-1 font-bold rounded-lg text-black bg-blue-700 text-3xl" : "   p-1 font-bold rounded-lg text-black bg-purple-300 text-3xl "} ><MdOutlineRestartAlt onClick={handleLeaveChat} /></span>
             <input
               type="text"
               ref={inputRef}
@@ -127,7 +129,11 @@ function Chat() {
           </div>
         </>
       ) : (
+        <>
+        <div className="h-[200px] w-[400px]    border-2 border-red-400  hidden     absolute top-[20%] bottom-[80%] left-[50%] right-[50%] translate-y-[-50%] translate-x-[-50%]   "  ></div>
         <p className={isDark === "false" ? "text-center h-[20%] w-[100%] fixed top-[50%] bottom-[50%] left-[50%] right-[50%]  text-white translate-y-[-50%] translate-x-[-50%] " : "text-center translate-y-[-50%] translate-x-[-50%]  h-[20%] w-[100%] fixed top-[50%] bottom-[50%] left-[50%] right-[50%]  "} >Finding for a match .. <span className="finder animate-bounce inline-block ">🔍</span></p>
+        <div className="h-[200px] w-[400px]  hidden border-2 border-red-400   absolute top-[70%] bottom-[50%] left-[50%] right-[50%] translate-y-[-50%] translate-x-[-50%]   "  ></div>
+        </>
       )}
     </div>
   );
