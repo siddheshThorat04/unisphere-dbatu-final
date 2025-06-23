@@ -28,7 +28,7 @@ const Events = () => {
       })
       const eventArray=res.data.events?.reverse()
       console.log(eventArray)
-      toast.success("Latest Events Fetched");
+      toast.success("Latest Events Fetched",{position:"top-center", autoClose: 500 , className:"custom-toast"});
       setLoading(false);
 
       setevents(eventArray)
@@ -41,7 +41,7 @@ const Events = () => {
     const res = await axios.post(`${API}/api/admin/deleteEvent/${id}`, {
       withCredentials:true
     })
-    toast.success("Event Deleted")
+    toast.success("Event Deleted",{position:"top-center", autoClose: 500 , className:"custom-toast"});
     console.log(res.data)
     window.location.reload();
   }
@@ -68,7 +68,7 @@ const Events = () => {
       withCredentials :true
     }).then((res) => {
       console.log(res.data); // Display server success message
-      toast.success(res.data.message);
+      toast.success(res.data.message,{position:"top-center", autoClose: 700 , className:"custom-toast"});
       window.location.reload();
     }).catch((error) => {
       console.error("Error:", error.response?.data?.message || "An error occurred");

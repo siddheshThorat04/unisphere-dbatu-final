@@ -38,7 +38,7 @@ const Leadboard = () => {
                 )
             })}
             </div>
-            <p  className={isDark==="false"?'text-white  absolute  bottom-0  text-center ':'text-black  absolute  bottom-0  text-center '} >To see YourSelf on this board you need to stay active by posting on platform.</p>
+            <p  className={isDark==="false"?'text-white  absolute  bottom-0  text-center ':'text-black  absolute  bottom-0  text-center '} > 1 contribution translates to 1 post (insight or event or project)</p>
         </div>
     )
 }

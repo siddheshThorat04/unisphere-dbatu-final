@@ -55,12 +55,12 @@ const Signup = () => {
     const response = await axios.post(`${API}/api/auth/signup`, { username, password, college }, { withCredentials: true });
     console.log(response.data)
     if (response.data.error) {
-      toast.error(response.data.error)
+      toast.error(response.data.error,{position:"top-center", autoClose: 500 , className:"custom-toast"} );
 
     } else {
       localStorage.setItem("authUser", JSON.stringify(response.data.user));
       setauthUser(response.data.user);
-      toast.success("signed up successfully");
+      toast.success("signed up successfully",{position:"top-center", autoClose: 500 , className:"custom-toast"} );
       localStorage.setItem("mbTheme", false)
     }
   }

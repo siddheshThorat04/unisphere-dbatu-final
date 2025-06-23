@@ -31,7 +31,7 @@ const News = () => {
       });
       console.log(res.data);
       setnews(res.data?.news.reverse());
-      toast.success("Latest Insights Fetched");
+      toast.success("Latest Insights Fetched",{position:"top-center", autoClose: 500 , className:"custom-toast"});
       setLoading(false);
     };
     getNews();
@@ -64,7 +64,7 @@ const News = () => {
     );
     const data = res.data;
     console.log(data);
-    toast.success("News Deleted");
+    toast.success("News Deleted",{position:"top-center", autoClose: 500 , className:"custom-toast"});
     window.location.reload();
   };
   const submit = async (e) => {
@@ -87,7 +87,7 @@ const News = () => {
       })
       .then((res) => {
         // console.log(res.data.message); // Display server success message
-        toast.success(res.data.message);
+        toast.success(res.data.message,{position:"top-center", autoClose: 700 , className:"custom-toast"});
         window.location.reload();
       })
       .catch((error) => {

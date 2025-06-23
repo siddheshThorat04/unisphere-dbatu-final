@@ -8,6 +8,7 @@ import { useDarkThemeContext } from '../context/DarkTheme';
 import { GoHome } from "react-icons/go"
 import { FaInstagram } from "react-icons/fa";
 import axios from "axios"
+import { toast } from 'react-toastify';
 const StudyZone = () => {
     // const API= "http://localhost:5000"
     const API = import.meta.env.VITE_MODE === "DEVELOPMENT" ? import.meta.env.VITE_API_DEV : import.meta.env.VITE_API_PRODUCTION
@@ -22,6 +23,7 @@ const StudyZone = () => {
 
                 console.log(res.data);
                 setMeetZone(res.data.meet);
+                toast.success("maintain silence 🤫", { position: "top-center", autoClose: 500, className: "custom-toast" });    
             } catch (error) {
                 console.log(error);
             }

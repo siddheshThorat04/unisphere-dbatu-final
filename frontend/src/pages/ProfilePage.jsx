@@ -33,8 +33,9 @@ const ProfilePage = () => {
   }, []);
   const logout = (e) => {
     localStorage.setItem("authUser", null);
-    setAuthUser(null);
-    window.location.href = "/";
+    setauthUser(null);
+    window.location.replace("/");
+
   };
   const handleBlockUser = async () => {
     const res = await axios.post(
@@ -75,13 +76,13 @@ const ProfilePage = () => {
       // Successful request (200 OK)
       localStorage.setItem("authUser", JSON.stringify(res.data.user));
       setauthUser(res.data.user);
-      toast.success("Profile updated!");
+      toast.success("Profile updated!",{position:"top-center", autoClose: 700 , className:"custom-toast"});
         window.location.reload();
     } catch (err) {
       if (err.response && err.response.data?.error) {
-        toast.error(err.response.data.error); // Shows "Username Taken"
+        toast.error(err.response.data.error,{position:"top-center", autoClose: 700 , className:"custom-toast"}); // Shows "Username Taken"
       } else {
-        toast.error("Something went wrong!");
+        toast.error("Something went wrong!" ,{position:"top-center", autoClose: 700 , className:"custom-toast"});
       }
     }
   };

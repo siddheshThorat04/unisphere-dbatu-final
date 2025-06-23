@@ -44,6 +44,7 @@ const Collabrate = () => {
         withCredentials: true,
       })
       .then((res) => {
+        // toast.success("Project now open for collaboration",{position:"top-center", autoClose: 700 , className:"custom-toast"});
         window.location.reload();
       })
       .catch((error) => {
@@ -78,7 +79,7 @@ const Collabrate = () => {
               : "Post_latest_happening  text-gray-400   text-3xl "
           }
         >
-          Collabrate
+          Collaborate
         </h1>
         <button className="text-black z-100">
           <CiHome
@@ -108,7 +109,7 @@ const Collabrate = () => {
               {loading ? (
                 <span className="finder animate-bounce inline-block ">🔍</span>
               ) : (
-                "Ohh, Such a Empty 😞"
+                "Ohh, Such an Empty 😞"
               )}{" "}
               <span
                 className={
