@@ -98,7 +98,9 @@ function Chat() {
     }
   }
   const handleLeaveChat = () => {
-    window.location.href = "/";
+    socket.emit("leaveChat");
+    
+    window.location.reload();
   }
 
   return (
