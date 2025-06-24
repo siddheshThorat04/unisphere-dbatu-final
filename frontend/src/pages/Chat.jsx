@@ -11,8 +11,6 @@ import sendSound from "../assets/sendSound.mp3"
 import newMessage from "../assets/newMessage.mp3"
 import { MdOutlineRestartAlt } from "react-icons/md";
 
-
-
 // newww 
 
 
@@ -99,8 +97,8 @@ function Chat() {
   }
   const handleLeaveChat = () => {
     socket.emit("leaveChat");
+    window.location.href="/chat";
     
-    window.location.reload();
   }
 
   return (
