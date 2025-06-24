@@ -73,6 +73,8 @@ function Chat() {
       socket.off("matched");
       socket.off("message");
       socket.off("partnerLeft");
+      socket.off("typing");
+      socket.off("typing stop");
     };
   }, []);
 

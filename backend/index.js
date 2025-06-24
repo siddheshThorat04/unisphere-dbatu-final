@@ -33,17 +33,88 @@ app.use("/api/user", userRoutes)
 let queue = {}; // Store users waiting for a match
 let activeChats = {}; // Store active chat pairs
 
+// io.on("connection", (socket) => {
+//   console.log("User connected:", socket.id);
+
+//   // User joins the queue
+//   socket.on("joinQueue", () => {
+//     queue[socket.id] = true;
+
+//     let availableUsers = Object.keys(queue).filter((id) => id !== socket.id);
+
+//     if (availableUsers.length > 0) {
+//       let partnerId = availableUsers[0];
+
+//       delete queue[socket.id];
+//       delete queue[partnerId];
+
+//       activeChats[socket.id] = partnerId;
+//       activeChats[partnerId] = socket.id;
+
+//       io.to(socket.id).emit("matched", partnerId);
+//       io.to(partnerId).emit("matched", socket.id);
+//     }
+//   });
+
+//   // Handle messages
+//   socket.on("message", ({ receiver, message }) => {
+//     io.to(receiver).emit("message", { sender: socket.id, message });
+//   });
+
+//   // **Typing Indicator Events**
+//   socket.on("typing", () => {
+//     let partnerId = activeChats[socket.id];
+//     if (partnerId) {
+//       io.to(partnerId).emit("typing");
+//     }
+//   });
+
+//   socket.on("typing_stop", () => {
+//     let partnerId = activeChats[socket.id];
+//     if (partnerId) {
+//       io.to(partnerId).emit("typing_stop");
+//     }
+//   });
+
+//   // Handle user leaving the chat or navigating away
+//   socket.on("leaveChat", () => {
+//     let partnerId = activeChats[socket.id];
+
+//     if (partnerId) {
+//       io.to(partnerId).emit("partnerLeft");
+//       delete activeChats[partnerId];
+//     }
+//     delete activeChats[socket.id];
+//   });
+
+//   // Handle user disconnection
+//   socket.on("disconnect", () => {
+//     console.log("User disconnected:", socket.id);
+
+//     let partnerId = activeChats[socket.id];
+
+//     if (partnerId) {
+//       io.to(partnerId).emit("partnerLeft");
+//       delete activeChats[partnerId];
+//     }
+//     delete activeChats[socket.id];
+//     delete queue[socket.id];
+//   });
+// });
 io.on("connection", (socket) => {
   console.log("User connected:", socket.id);
 
   // User joins the queue
   socket.on("joinQueue", () => {
+    // ✅ Prevent already matched users from rejoining the queue
+    if (activeChats[socket.id]) return;
+
     queue[socket.id] = true;
 
-    let availableUsers = Object.keys(queue).filter((id) => id !== socket.id);
+    const availableUsers = Object.keys(queue).filter((id) => id !== socket.id);
 
     if (availableUsers.length > 0) {
-      let partnerId = availableUsers[0];
+      const partnerId = availableUsers[0];
 
       delete queue[socket.id];
       delete queue[partnerId];
@@ -61,47 +132,52 @@ io.on("connection", (socket) => {
     io.to(receiver).emit("message", { sender: socket.id, message });
   });
 
-  // **Typing Indicator Events**
+  // ✅ Typing Indicator Events (with correct naming)
   socket.on("typing", () => {
-    let partnerId = activeChats[socket.id];
+    const partnerId = activeChats[socket.id];
     if (partnerId) {
       io.to(partnerId).emit("typing");
     }
   });
 
   socket.on("typing_stop", () => {
-    let partnerId = activeChats[socket.id];
+    const partnerId = activeChats[socket.id];
     if (partnerId) {
       io.to(partnerId).emit("typing_stop");
     }
   });
 
-  // Handle user leaving the chat or navigating away
+  // Handle user leaving the chat
   socket.on("leaveChat", () => {
-    let partnerId = activeChats[socket.id];
+    const partnerId = activeChats[socket.id];
 
     if (partnerId) {
       io.to(partnerId).emit("partnerLeft");
+      io.to(partnerId).emit("typing_stop"); // optional
       delete activeChats[partnerId];
     }
+
     delete activeChats[socket.id];
-    queue[socket.id] = true;
+    // ✅ Do NOT re-add to queue; frontend should call joinQueue again
   });
 
-  // Handle user disconnection
+  // Handle disconnection
   socket.on("disconnect", () => {
     console.log("User disconnected:", socket.id);
 
-    let partnerId = activeChats[socket.id];
+    const partnerId = activeChats[socket.id];
 
     if (partnerId) {
       io.to(partnerId).emit("partnerLeft");
+      io.to(partnerId).emit("typing_stop"); // optional
       delete activeChats[partnerId];
     }
+
     delete activeChats[socket.id];
-    delete queue[socket.id];
+    delete queue[socket.id]; // cleanup if user was in queue
   });
 });
+
 server.listen(PORT, () => {
   connectDB();
   console.log("Server is running on port: ", PORT);
