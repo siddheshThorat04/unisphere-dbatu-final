@@ -50,13 +50,22 @@ const ContactUs = () => {
             <span>Siddhesh Thorat on LinkedIn</span>
           </a>
           <a
-            href="https://www.instagram.com/matrics_updates"
+            href="https://www.instagram.com/matrics.online"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex   items-center space-x-2 text-pink-500 hover:underline text-sm"
           >
             <span className= {isDarkMode ? ' text-white' : ' text-black'} >Official page:</span><FaInstagram />
             <span>@matrics_updates</span>
+          </a>
+          <a
+            href="https://www.instagram.com/dbatu_btech_maharashtra"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex   items-center space-x-2 text-pink-500 hover:underline text-sm"
+          >
+            <span className= {isDarkMode ? ' text-white' : ' text-black'} >Advertising credits:</span><FaInstagram />
+            <span>@dbatu_btech_maharashtra</span>
           </a>
 
         </div>
